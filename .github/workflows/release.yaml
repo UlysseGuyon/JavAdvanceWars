@@ -28,5 +28,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
       - name: Prepare Release (New version/tag after commit)
-        mvn --batch-mode release:clean release:prepare
+        run: mvn --batch-mode release:clean release:prepare
+      - name: Perform Release
+        run: mvn release:perform
       
