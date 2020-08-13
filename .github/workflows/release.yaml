@@ -27,7 +27,7 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-      - name Prevently create .m2 directory
+      - name: Prevently create .m2 directory
         continue-on-error: true
         run: mkdir ~/.m2 2> /dev/null
       - name: Give git credentials to Maven
