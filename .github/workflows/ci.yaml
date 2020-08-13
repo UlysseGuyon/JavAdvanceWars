@@ -43,9 +43,15 @@ jobs:
           java-version: 11
       - name: Compile
         run: mvn clean package
+      - name: Test path 1
+        run: ls
+      - name: Test path 2
+        run: ls assembly
+      - name: Test path 3
+        run ls assembly/target
       - name: Upload Build Artifact (master only)
         if: ${{ github.ref == 'refs/heads/master' }}
         uses: actions/upload-artifact@v1.0.0
         with:
           name: AdvanceWars-Build
-          path: assembly/target/Advance-Wars-*.jar
+          path: assembly/target/*.jar
