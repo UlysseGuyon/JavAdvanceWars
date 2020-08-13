@@ -48,7 +48,7 @@ jobs:
       - name: Test path 2
         run: ls assembly
       - name: Test path 3
-        run ls assembly/target
+        run: ls assembly/target
       - name: Upload Build Artifact (master only)
         if: ${{ github.ref == 'refs/heads/master' }}
         uses: actions/upload-artifact@v1.0.0
