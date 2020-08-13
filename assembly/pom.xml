@@ -59,7 +59,7 @@
         <artifactId>maven-assembly-plugin</artifactId>
         <configuration>
           <appendAssemblyId>false</appendAssemblyId>
-          <finalName>Advance-Wars-${version}</finalName>
+          <finalName>${releaseJarName}</finalName>
           <descriptors>
             <descriptor>archive-deploy.xml</descriptor>
           </descriptors>

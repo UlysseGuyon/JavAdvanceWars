@@ -32,8 +32,12 @@
     <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
 
     <version>${project.version}</version>
+    <versionTag>V${version}</versionTag>
 
     <baseGroupId>${project.groupId}.aw</baseGroupId>
+    
+    <releaseJarPath>assembly/target/</releaseJarPath>
+    <releaseJarName>Advance-Wars-${version}</releaseJarName>
   </properties>
   
   <scm>
@@ -120,6 +124,13 @@
 	      <artifactId>maven-release-plugin</artifactId>
 	      <version>3.0.0-M1</version>
         </plugin>
+
+        <!-- Plugin responsable de l'association du jar généré à la release github -->
+        <plugin>
+	      <groupId>de.jutzig</groupId>
+	      <artifactId>github-release-plugin</artifactId>
+	      <version>1.1.1</version>
+        </plugin>
       </plugins>
     </pluginManagement>
     
@@ -134,6 +145,31 @@
           <remoteTagging>false</remoteTagging>
         </configuration>
   	  </plugin>
+  	  <plugin>
+	    <artifactId>github-release-plugin</artifactId>
+	    <configuration>
+	      <description>Release ${versionTag} of the Advance Wars jar</description>
+	      <releaseName>${versionTag} Release</releaseName>
+	      <tag>${versionTag}</tag>
+	      <fileSets>
+	        <fileSet>
+	          <directory>${releaseJarPath}</directory>
+	          <includes>
+	            <include>${releaseJarName}*.jar</include>
+	          </includes>
+	        </fileSet>
+	      </fileSets>
+	    </configuration>
+        <executions>
+          <execution>
+            <id>github-release-assets</id>
+            <phase>install</phase>
+            <goals>
+              <goal>release</goal>
+            </goals>
+          </execution>
+        </executions>
+	  </plugin>
     </plugins>
   </build>
     
