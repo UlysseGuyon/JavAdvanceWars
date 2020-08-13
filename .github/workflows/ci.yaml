@@ -43,13 +43,13 @@ jobs:
             ${{ runner.os }}-maven-
       - name: Compile
         run: mvn clean package
-      - name: Test cwd
-        run: pwd
-      - name: Test path
-        run: ls assembly/target
+      # - name: Test cwd
+      #   run: pwd
+      # - name: Test path
+      #   run: ls assembly/target
       - name: Upload Build Artifact (master only)
         if: ${{ github.ref == 'refs/heads/master' }}
         uses: actions/upload-artifact@v1.0.0
         with:
           name: AdvanceWars-Build
-          path: assembly/target/*.jar
+          path: assembly/target/
