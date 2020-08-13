@@ -34,6 +34,10 @@ jobs:
         env:
           GIT_PSW: ${{ secrets.GIT_PSW }}
         run: echo "<settings><servers><server><id>github</id><username>UlysseGuyon</username><password>${GIT_PSW}</password></server></servers></settings>" > ~/.m2/settings.xml
+      - name: Setup local git email/name
+        run: |
+          git config user.email "ulysse.guyon@gmail.com"
+          git config user.name "Ulysse Guyon"
       - name: Prepare Release (New version/tag after commit)
         run: mvn --batch-mode release:clean release:prepare
       - name: Perform Release
