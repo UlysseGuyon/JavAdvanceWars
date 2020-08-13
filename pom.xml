@@ -37,8 +37,8 @@
   </properties>
   
   <scm>
-    <connection>scm:git:git@github.com/UlysseGuyon/JavAdvanceWars.git</connection>
-    <developerConnection>scm:git:git@github.com/UlysseGuyon/JavAdvanceWars.git</developerConnection>
+    <connection>scm:git:git@github.com:UlysseGuyon/JavAdvanceWars.git</connection>
+    <developerConnection>scm:git:git@github.com:UlysseGuyon/JavAdvanceWars.git</developerConnection>
     <url>https://github.com/UlysseGuyon/JavAdvanceWars.git</url>
     <tag>V@{project.version}</tag>
   </scm>
