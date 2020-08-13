@@ -43,11 +43,9 @@ jobs:
           java-version: 11
       - name: Compile
         run: mvn clean package
-      - name: Test path 1
-        run: ls
-      - name: Test path 2
-        run: ls assembly
-      - name: Test path 3
+      - name: Test cwd
+        run: echo cwd
+      - name: Test path
         run: ls assembly/target
       - name: Upload Build Artifact (master only)
         if: ${{ github.ref == 'refs/heads/master' }}
