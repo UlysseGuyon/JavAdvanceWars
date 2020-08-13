@@ -10,6 +10,10 @@ jobs:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v1
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
       - name: Cache local Maven repository
         uses: actions/cache@v2
         with:
@@ -17,10 +21,6 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-      - name: Set up JDK 11
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
       - name: Run JUnit through Maven
         run: mvn clean test
 
@@ -43,10 +43,6 @@ jobs:
             ${{ runner.os }}-maven-
       - name: Compile
         run: mvn clean package
-      # - name: Test cwd
-      #   run: pwd
-      # - name: Test path
-      #   run: ls assembly/target
       - name: Upload Build Artifact (master only)
         if: ${{ github.ref == 'refs/heads/master' }}
         uses: actions/upload-artifact@v1.0.0
