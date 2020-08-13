@@ -27,12 +27,13 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
+      - name Prevently create .m2 directory
+        continue-on-error: true
+        run: mkdir ~/.m2 2> /dev/null
       - name: Give git credentials to Maven
         env:
           GIT_PSW: ${{ secrets.GIT_PSW }}
-        run: |
-          mkdir ~/.m2 2> /dev/null
-          echo "<settings><servers><server><id>github</id><username>UlysseGuyon</username><password>${GIT_PSW}</password></server></servers></settings>" > ~/.m2/settings.xml
+        run: echo "<settings><servers><server><id>github</id><username>UlysseGuyon</username><password>${GIT_PSW}</password></server></servers></settings>" > ~/.m2/settings.xml
       - name: Prepare Release (New version/tag after commit)
         run: mvn --batch-mode release:clean release:prepare
       - name: Perform Release
