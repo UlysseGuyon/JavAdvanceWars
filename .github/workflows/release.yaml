@@ -42,4 +42,9 @@ jobs:
         run: mvn --batch-mode release:clean release:prepare
       - name: Perform Release
         run: mvn release:perform
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: AdvanceWars-Build
+          path: assembly/target/
       
