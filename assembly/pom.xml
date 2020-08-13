@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.ulysseguyon</groupId>
+    <artifactId>advance_wars</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <groupId>org.ulysseguyon.aw</groupId>
+  <artifactId>assembly</artifactId>
+  <packaging>pom</packaging>
+
+  <name>assembly</name>
+
+  <properties>
+    <baseGroupId>${project.groupId}</baseGroupId>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>${baseGroupId}</groupId>
+      <artifactId>core</artifactId>
+      <version>${version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${baseGroupId}</groupId>
+      <artifactId>gui</artifactId>
+      <version>${version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${baseGroupId}</groupId>
+      <artifactId>models</artifactId>
+      <version>${version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${baseGroupId}</groupId>
+      <artifactId>network</artifactId>
+      <version>${version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${baseGroupId}</groupId>
+      <artifactId>save</artifactId>
+      <version>${version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${baseGroupId}</groupId>
+      <artifactId>sound</artifactId>
+      <version>${version}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- Création de l'archive de déploiement -->
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <appendAssemblyId>false</appendAssemblyId>
+          <finalName>Advance-Wars-${versions.aw}</finalName>
+          <descriptors>
+            <descriptor>archive-deploy.xml</descriptor>
+          </descriptors>
+          <archive>
+            <manifest>
+              <mainClass>${baseGroupId}.core.App</mainClass>
+            </manifest>
+            <manifestEntries>
+              <Created-By>${author}</Created-By>
+	          </manifestEntries>
+          </archive>
+        </configuration>
+        <executions>
+          <execution>
+            <id>assembly-archive-deploy</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
