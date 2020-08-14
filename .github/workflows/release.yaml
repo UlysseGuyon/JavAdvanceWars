@@ -52,7 +52,7 @@ jobs:
           asset_name: Advance-Wars-${{ env.NEW_VERSION }}.jar
           asset_content_type: application/java-archive
       - name: Change versionning to next version snapshot
-        run: sudo ./scripts/versionning.sh
+        run: sudo bash ./scripts/versionning.sh
       - name: Commit post Release
         uses: EndBug/add-and-commit@v4
         env:
