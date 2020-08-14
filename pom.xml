@@ -134,27 +134,10 @@
 		  <artifactId>github-release-plugin</artifactId>
 		  <version>${githubReleasPluginVersion}</version>
         </plugin>
-
-        <!-- Plugin responsable de l'utilisation de scripts après plugin -->
-        <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>1.5.0</version>
-        </plugin>
       </plugins>
     </pluginManagement>
     
     <plugins>
-      <plugin>
-        <artifactId>exec-maven-plugin</artifactId>
-        <configuration>
-          <executable>bash</executable>
-          <arguments>
-            <argument>mvn</argument>
-            <argument>github-release:release</argument>
-          </arguments>
-        </configuration>
-      </plugin>
       <plugin>
         <artifactId>maven-release-plugin</artifactId>
         <configuration>
