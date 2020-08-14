@@ -37,7 +37,8 @@
     <baseGroupId>${project.groupId}.aw</baseGroupId>
     
     <releaseJarPath>assembly/target</releaseJarPath>
-    <releaseJarName>Advance-Wars-${version}</releaseJarName>
+    <releaseJarPrefix>Advance-Wars</releaseJarPrefix>
+    <releaseJarName>${releaseJarPrefix}-${version}</releaseJarName>
     
     <githubReleasPluginVersion>1.4.0</githubReleasPluginVersion>
   </properties>
@@ -46,7 +47,7 @@
     <connection>scm:git:https://github.com/UlysseGuyon/JavAdvanceWars.git</connection>
     <developerConnection>scm:git:https://github.com/UlysseGuyon/JavAdvanceWars.git</developerConnection>
     <url>https://github.com/UlysseGuyon/JavAdvanceWars.git</url>
-    <tag>V@{project.version}</tag>
+    <tag>V${version}</tag>
   </scm>
   
   <dependencyManagement>
@@ -133,23 +134,41 @@
 		  <artifactId>github-release-plugin</artifactId>
 		  <version>${githubReleasPluginVersion}</version>
         </plugin>
+
+        <!-- Plugin responsable de l'utilisation de scripts après plugin -->
+        <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.5.0</version>
+        </plugin>
       </plugins>
     </pluginManagement>
     
     <plugins>
+      <plugin>
+        <artifactId>exec-maven-plugin</artifactId>
+        <configuration>
+          <executable>bash</executable>
+          <arguments>
+            <argument>mvn</argument>
+            <argument>github-release:release</argument>
+          </arguments>
+        </configuration>
+      </plugin>
       <plugin>
         <artifactId>maven-release-plugin</artifactId>
         <configuration>
           <goals>pre-integration-test</goals>
           <preparationGoals>package</preparationGoals>
           <allowTimestampedSnapshots>true</allowTimestampedSnapshots>
-          <tagNameFormat>@{version}</tagNameFormat>
+          <tagNameFormat>${version}</tagNameFormat>
           <remoteTagging>false</remoteTagging>
+          <completionGoals>exec:exec</completionGoals>
         </configuration>
   	  </plugin>
   	  <plugin>
 	    <artifactId>github-release-plugin</artifactId>
-		  <version>${githubReleasPluginVersion}</version>
+		<version>${githubReleasPluginVersion}</version>
 	    <configuration>
 	      <description>Release ${versionGitTag} of the Advance Wars jar</description>
 	      <releaseName>${versionGitTag} Release</releaseName>
@@ -158,20 +177,11 @@
 	        <fileSet>
 	          <directory>${releaseJarPath}</directory>
 	          <includes>
-	            <include>${releaseJarName}*.jar</include>
+	            <include>${releaseJarPrefix}*.jar</include>
 	          </includes>
 	        </fileSet>
 	      </fileSets>
 	    </configuration>
-        <!-- <executions>
-          <execution>
-            <id>github-release-assets</id>
-            <phase>deploy</phase>
-            <goals>
-              <goal>release</goal>
-            </goals>
-          </execution>
-        </executions> -->
 	  </plugin>
     </plugins>
   </build>

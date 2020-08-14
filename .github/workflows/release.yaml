@@ -42,6 +42,6 @@ jobs:
         run: mvn --batch-mode release:clean release:prepare
       - name: Perform Release
         run: mvn release:perform
-      - name: Upload jar as Release asset
-        run: mvn github-release:release
+      # - name: Upload jar as Release asset
+      #   run: mvn github-release:release
       
