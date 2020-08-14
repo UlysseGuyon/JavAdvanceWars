@@ -38,10 +38,12 @@ jobs:
         run: |
           git config user.email "ulysse.guyon@gmail.com"
           git config user.name "Ulysse Guyon"
-      - name: Prepare Release (New version/tag after commit)
-        run: mvn --batch-mode release:clean release:prepare
-      - name: Perform Release
-        run: mvn release:perform
-      # - name: Upload jar as Release asset
-      #   run: mvn github-release:release
+      - name: Build project
+        run: mvn -B package
+      # - name: Prepare Release (New version/tag after commit)
+      #   run: mvn --batch-mode release:clean release:prepare
+      # - name: Perform Release
+      #   run: mvn release:perform
+      - name: Upload jar as Release asset
+        run: mvn -B github-release:release
       

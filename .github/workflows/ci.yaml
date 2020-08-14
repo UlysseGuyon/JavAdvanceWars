@@ -22,7 +22,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
       - name: Run JUnit through Maven
-        run: mvn clean test
+        run: mvn -B clean test
 
   build:
     name: Build Project
@@ -42,7 +42,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
       - name: Compile
-        run: mvn clean package
+        run: mvn -B clean package
       - name: Upload Build Artifact (master only)
         if: ${{ github.ref == 'refs/heads/master' }}
         uses: actions/upload-artifact@v1.0.0
