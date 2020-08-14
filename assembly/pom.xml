@@ -69,7 +69,7 @@
             </manifest>
             <manifestEntries>
               <Created-By>${author}</Created-By>
-	          </manifestEntries>
+	        </manifestEntries>
           </archive>
         </configuration>
         <executions>
