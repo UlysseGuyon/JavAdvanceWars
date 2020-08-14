@@ -36,7 +36,7 @@
 
     <baseGroupId>${project.groupId}.aw</baseGroupId>
     
-    <releaseJarPath>assembly/target</releaseJarPath>
+    <releaseJarPath>${project.basedir}/assembly/target</releaseJarPath>
     <releaseJarPrefix>Advance-Wars</releaseJarPrefix>
     <releaseJarName>${releaseJarPrefix}-${version}</releaseJarName>
     
@@ -120,13 +120,6 @@
           <artifactId>maven-assembly-plugin</artifactId>
           <version>3.3.0</version>
         </plugin>
-        
-        <!-- Plugin responsable du deploiement de la version release -->
-        <plugin>
-	      <groupId>org.apache.maven.plugins</groupId>
-	      <artifactId>maven-release-plugin</artifactId>
-	      <version>3.0.0-M1</version>
-        </plugin>
 
         <!-- Plugin responsable de l'association du jar généré à la release github -->
         <plugin>
@@ -138,16 +131,6 @@
     </pluginManagement>
     
     <plugins>
-      <plugin>
-        <artifactId>maven-release-plugin</artifactId>
-        <configuration>
-          <goals>pre-integration-test</goals>
-          <preparationGoals>package</preparationGoals>
-          <allowTimestampedSnapshots>true</allowTimestampedSnapshots>
-          <tagNameFormat>${version}</tagNameFormat>
-          <remoteTagging>false</remoteTagging>
-        </configuration>
-  	  </plugin>
   	  <plugin>
 	    <artifactId>github-release-plugin</artifactId>
 		<version>${githubReleasPluginVersion}</version>
