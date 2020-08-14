@@ -37,7 +37,7 @@
     <baseGroupId>${project.groupId}.aw</baseGroupId>
     
     <releaseJarPrefix>Advance-Wars</releaseJarPrefix>
-    <releaseJarName>${releaseJarPrefix}-${version}</releaseJarName>
+    <releaseJarName>${releaseJarPrefix}-${versionGitTag}</releaseJarName>
     
     <githubReleasPluginVersion>1.4.0</githubReleasPluginVersion>
   </properties>
