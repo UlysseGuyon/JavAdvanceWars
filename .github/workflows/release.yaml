@@ -27,19 +27,49 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-      - name: Prevently create .m2 directory
-        continue-on-error: true
-        run: mkdir ~/.m2 2> /dev/null
-      - name: Give git credentials to Maven
-        env:
-          GIT_PSW: ${{ secrets.GIT_PSW }}
-        run: echo "<settings><servers><server><id>github</id><username>UlysseGuyon</username><password>${GIT_PSW}</password></server></servers></settings>" > ~/.m2/settings.xml
-      - name: Setup local git email/name
-        run: |
-          git config user.email "ulysse.guyon@gmail.com"
-          git config user.name "Ulysse Guyon"
+      - name: Change versionning to release
+        run: echo "::set-env name=NEW_VERSION::$(bash ./scripts/versionning.sh)"
       - name: Build project
         run: mvn -B package
-      - name: Upload jar as Release asset
-        run: mvn -B github-release:release -e -X
+      - name: Commit Release version
+        uses: EndBug/add-and-commit@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          author_name: Ulysse Guyon (Bot)
+          author_email: ulysse.guyon@gmail.com
+          message: "Release commit"
+          add: "."
+      - name: Create Release on github
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${NEW_VERSION}
+          release_name: Release ${NEW_VERSION}
+          body: Release version ${NEW_VERSION} of the Advance Wars game
+          draft: false
+          prerelease: false
+      - name: Upload artifact to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./assembly/target
+          asset_name: Advance-Wars-${NEW_VERSION}.jar
+          asset_content_type: application/java-archive
+      - name: Change versionning to next version snapshot
+        run: ./scripts/versionning.sh
+      - name: Commit post Release
+        uses: EndBug/add-and-commit@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          author_name: Ulysse Guyon (Bot)
+          author_email: ulysse.guyon@gmail.com
+          message: "Post-Release commit"
+          add: "."
+
       

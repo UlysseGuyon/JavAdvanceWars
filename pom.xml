@@ -36,19 +36,11 @@
 
     <baseGroupId>${project.groupId}.aw</baseGroupId>
     
-    <releaseJarPath>${project.basedir}/assembly/target</releaseJarPath>
     <releaseJarPrefix>Advance-Wars</releaseJarPrefix>
     <releaseJarName>${releaseJarPrefix}-${version}</releaseJarName>
     
     <githubReleasPluginVersion>1.4.0</githubReleasPluginVersion>
   </properties>
-  
-  <scm>
-    <connection>scm:git:https://github.com/UlysseGuyon/JavAdvanceWars.git</connection>
-    <developerConnection>scm:git:https://github.com/UlysseGuyon/JavAdvanceWars.git</developerConnection>
-    <url>https://github.com/UlysseGuyon/JavAdvanceWars.git</url>
-    <tag>V${version}</tag>
-  </scm>
   
   <dependencyManagement>
     <dependencies>    
@@ -120,34 +112,10 @@
           <artifactId>maven-assembly-plugin</artifactId>
           <version>3.3.0</version>
         </plugin>
-
-        <!-- Plugin responsable de l'association du jar généré à la release github -->
-        <plugin>
-	      <groupId>de.jutzig</groupId>
-		  <artifactId>github-release-plugin</artifactId>
-		  <version>${githubReleasPluginVersion}</version>
-        </plugin>
       </plugins>
     </pluginManagement>
     
     <plugins>
-  	  <plugin>
-	    <artifactId>github-release-plugin</artifactId>
-		<version>${githubReleasPluginVersion}</version>
-	    <configuration>
-	      <description>Release ${versionGitTag} of the Advance Wars jar</description>
-	      <releaseName>${versionGitTag} Release</releaseName>
-	      <tag>${versionGitTag}</tag>
-	      <fileSets>
-	        <fileSet>
-	          <directory>${releaseJarPath}/</directory>
-	          <includes>
-	            <include>*.jar</include>
-	          </includes>
-	        </fileSet>
-	      </fileSets>
-	    </configuration>
-	  </plugin>
     </plugins>
   </build>
     
