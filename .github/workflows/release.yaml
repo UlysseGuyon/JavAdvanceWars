@@ -48,7 +48,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./assembly/target
+          asset_path: ./assembly/target/Advance-Wars-${{ env.NEW_VERSION }}.jar
           asset_name: Advance-Wars-${{ env.NEW_VERSION }}.jar
           asset_content_type: application/java-archive
       - name: Change versionning to next version snapshot
