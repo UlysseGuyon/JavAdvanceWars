@@ -31,24 +31,15 @@ jobs:
         run: echo "::set-env name=NEW_VERSION::$(bash ./scripts/versionning.sh)"
       - name: Build project
         run: mvn -B package
-      - name: Commit Release version
-        uses: EndBug/add-and-commit@v4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          author_name: Ulysse Guyon (Bot)
-          author_email: ulysse.guyon@gmail.com
-          message: "Release commit"
-          add: "."
       - name: Create Release on github
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${NEW_VERSION}
-          release_name: Release ${NEW_VERSION}
-          body: Release version ${NEW_VERSION} of the Advance Wars game
+          tag_name: ${{ env.NEW_VERSION }}
+          release_name: Release ${{ env.NEW_VERSION }}
+          body: Release version ${{ env.NEW_VERSION }} of the Advance Wars game
           draft: false
           prerelease: false
       - name: Upload artifact to Release
@@ -58,7 +49,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./assembly/target
-          asset_name: Advance-Wars-${NEW_VERSION}.jar
+          asset_name: Advance-Wars-${{ env.NEW_VERSION }}.jar
           asset_content_type: application/java-archive
       - name: Change versionning to next version snapshot
         run: ./scripts/versionning.sh
