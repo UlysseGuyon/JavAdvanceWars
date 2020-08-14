@@ -41,5 +41,5 @@ jobs:
       - name: Build project
         run: mvn -B package
       - name: Upload jar as Release asset
-        run: mvn -B github-release:release
+        run: mvn -B github-release:release -e -X
       
