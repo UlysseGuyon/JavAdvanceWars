@@ -140,9 +140,9 @@
 	      <tag>${versionGitTag}</tag>
 	      <fileSets>
 	        <fileSet>
-	          <directory>${releaseJarPath}</directory>
+	          <directory>${releaseJarPath}/</directory>
 	          <includes>
-	            <include>${releaseJarPrefix}*.jar</include>
+	            <include>*.jar</include>
 	          </includes>
 	        </fileSet>
 	      </fileSets>
