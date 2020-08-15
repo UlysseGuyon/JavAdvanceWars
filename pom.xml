@@ -40,6 +40,8 @@
     <releaseJarName>${releaseJarPrefix}-${versionGitTag}</releaseJarName>
     
     <githubReleasPluginVersion>1.4.0</githubReleasPluginVersion>
+    
+    <rootdir>${session.executionRootDirectory}</rootdir>
   </properties>
   
   <dependencyManagement>
@@ -76,12 +78,34 @@
         <version>${version}</version>
       </dependency>
             
-      <!-- ===== Bibliothèques tierces ===== -->    
-      <dependency>        
-        <groupId>org.junit.jupiter</groupId>        
-        <artifactId>junit-jupiter</artifactId>        
-        <version>5.6.2</version>        
-        <scope>test</scope>      
+      <!-- ===== Bibliothèques tierces ===== -->
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter</artifactId>
+        <version>5.6.2</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>com.googlecode.json-simple</groupId>
+        <artifactId>json-simple</artifactId>
+        <version>1.1.1</version>
+        <scope>compile</scope>
+      </dependency>
+      
+      <dependency>
+	    <groupId>org.slick2d</groupId>
+	    <artifactId>slick2d-core</artifactId>
+	    <version>1.0.2</version>
+        <scope>compile</scope>
+	  </dependency>
+	  
+	  <dependency>
+        <groupId>javax.jnlp</groupId>
+        <artifactId>jnlp-api</artifactId>
+        <version>5.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/javaws.jar</systemPath>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -112,6 +136,12 @@
           <artifactId>maven-assembly-plugin</artifactId>
           <version>3.3.0</version>
         </plugin>
+      
+        <plugin>
+		  <groupId>com.googlecode.mavennatives</groupId>
+		  <artifactId>maven-nativedependencies-plugin</artifactId>
+		  <version>0.0.7</version>
+	    </plugin>
       </plugins>
     </pluginManagement>
     
