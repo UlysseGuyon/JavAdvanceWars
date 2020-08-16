@@ -5,12 +5,12 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import org.ulysseguyon.aw.core.utils.Consts;
+import org.ulysseguyon.aw.core.utils.CoreConsts;
 
 
 public class Editor extends BasicGameState {
 
-	public static final int ID = Consts.GameState.EDITOR.id();
+	public static final int ID = CoreConsts.GameState.EDITOR.id();
 
 	@Override
 	public void init ( GameContainer container, StateBasedGame game ) throws SlickException {

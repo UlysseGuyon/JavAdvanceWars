@@ -51,12 +51,12 @@
         <groupId>${baseGroupId}</groupId>
         <artifactId>core</artifactId>
         <version>${version}</version>
-      </dependency>    
+      </dependency>
       <dependency>
-        <groupId>${baseGroupId}</groupId>       
+        <groupId>${baseGroupId}</groupId>
         <artifactId>gui</artifactId>
-        <version>${version}</version>     
-      </dependency>    
+        <version>${version}</version>
+      </dependency>
       <dependency>
         <groupId>${baseGroupId}</groupId>
         <artifactId>sound</artifactId>

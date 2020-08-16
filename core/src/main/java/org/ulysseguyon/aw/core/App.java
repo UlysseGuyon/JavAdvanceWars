@@ -3,7 +3,8 @@ package org.ulysseguyon.aw.core;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 import org.ulysseguyon.aw.core.appManagement.Engine;
-import org.ulysseguyon.aw.core.utils.Consts;
+import org.ulysseguyon.aw.core.utils.CoreConsts;
+import org.ulysseguyon.aw.gui.utils.GuiConsts;
 
 
 public class App {
@@ -23,9 +24,10 @@ public class App {
 		// }
 
 		try {
-			AppGameContainer app = new AppGameContainer( new Engine( Consts.GAME_NAME ) );
-			app.setDisplayMode( Consts.Window.BASE_W, Consts.Window.BASE_H, false );
-			app.setIcon( Consts.Window.ICON_PATH );
+			AppGameContainer app = new AppGameContainer( new Engine( CoreConsts.GAME_NAME ) );
+			app.setDisplayMode( CoreConsts.Window.BASE_W, CoreConsts.Window.BASE_H, false );
+			app.setIcon( GuiConsts.Paths.Logos.GAME_ICON_PATH );
+			app.setShowFPS( false );
 			app.start();
 		} catch ( SlickException e ) {
 			e.printStackTrace();

@@ -16,9 +16,15 @@
   <name>core</name>
 
   <properties>
+    <baseGroupId>${project.groupId}</baseGroupId>
   </properties>
 
   <dependencies>
+    <dependency>
+      <groupId>${baseGroupId}</groupId>
+      <artifactId>gui</artifactId>
+    </dependency>
+
 	<dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
@@ -32,7 +38,9 @@
   
   <build>
     <plugins>
-      <!-- <plugin>
+      <!-- 
+      TODO add this to an assembly building a zip containing the jar and the native libs
+      <plugin>
 		<groupId>com.googlecode.mavennatives</groupId>
 		<artifactId>maven-nativedependencies-plugin</artifactId>
 		<executions>
@@ -48,7 +56,8 @@
 				</configuration>
 			</execution>
 		</executions>
-	  </plugin> -->
+	  </plugin>
+	  -->
     </plugins>
 
     <resources>

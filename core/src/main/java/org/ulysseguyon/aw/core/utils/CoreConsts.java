@@ -1,9 +1,7 @@
 package org.ulysseguyon.aw.core.utils;
 
-import java.io.File;
-
-
-public final class Consts {
+// TODO rename this class in CoreConsts
+public final class CoreConsts {
 
 	public static final String GAME_NAME = "Advance Wars";
 
@@ -11,8 +9,6 @@ public final class Consts {
 
 		public static final int BASE_W = 1024;
 		public static final int BASE_H = 640;
-		public static final String ICON_PATH = "resources" + File.separator + "img" + File.separator + "logos"
-				+ File.separator + "Logo.png";
 
 	}
 
