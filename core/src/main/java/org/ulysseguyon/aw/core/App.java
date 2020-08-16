@@ -26,7 +26,7 @@ public class App {
 		try {
 			AppGameContainer app = new AppGameContainer( new Engine( CoreConsts.GAME_NAME ) );
 			app.setDisplayMode( CoreConsts.Window.BASE_W, CoreConsts.Window.BASE_H, false );
-			app.setIcon( GuiConsts.Paths.Logos.GAME_ICON_PATH );
+			app.setIcon( GuiConsts.Paths.Logos.GAME_ICON );
 			app.setShowFPS( false );
 			app.start();
 		} catch ( SlickException e ) {

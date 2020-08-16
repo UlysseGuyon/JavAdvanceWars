@@ -29,5 +29,23 @@
 	  <artifactId>slick2d-core</artifactId>
 	</dependency>
   </dependencies>
+  
+  <build>
+    <plugins>
+    </plugins>
+
+    <resources>
+      <resource>
+        <directory>src/main/resources/img</directory>
+        <targetPath>resources/img</targetPath>
+        <filtering>false</filtering>
+      </resource>
+      <resource>
+        <directory>src/main/resources/fonts</directory>
+        <targetPath>resources/fonts</targetPath>
+        <filtering>false</filtering>
+      </resource>
+    </resources>
+  </build>
 
 </project>
