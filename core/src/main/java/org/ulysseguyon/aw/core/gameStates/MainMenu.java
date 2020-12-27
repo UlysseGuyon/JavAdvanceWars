@@ -6,17 +6,24 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.ulysseguyon.aw.core.utils.CoreConsts;
+import org.ulysseguyon.aw.gui.screens.LoadingScreen;
 
 
 public class MainMenu extends BasicGameState {
 
-	public static final int ID = CoreConsts.GameState.MAIN_MENU.id();
+	public static final int	ID	= CoreConsts.GameState.MAIN_MENU.id();
+
+	private LoadingScreen	background;
 
 	@Override
-	public void init ( GameContainer container, StateBasedGame game ) throws SlickException {}
+	public void init ( GameContainer container, StateBasedGame game ) throws SlickException {
+		background = new LoadingScreen();
+	}
 
 	@Override
-	public void render ( GameContainer container, StateBasedGame game, Graphics g ) throws SlickException {}
+	public void render ( GameContainer container, StateBasedGame game, Graphics g ) throws SlickException {
+		background.draw( 0, 0, container.getWidth(), container.getHeight() );
+	}
 
 	@Override
 	public void update ( GameContainer container, StateBasedGame game, int delta ) throws SlickException {
