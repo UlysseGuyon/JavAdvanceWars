@@ -6,21 +6,58 @@ import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Rectangle;
 
 
+/**
+ * Class used for creating rectangle graphics in which the image is moving
+ * linearly at a given speed
+ * 
+ * @author Ulysse Guyon
+ */
 public class SmoothAnimation implements SizedRenderable {
 
 	protected static final int	MILLIS_PER_STEP	= 50;
 
+	/**
+	 * The image moving in this animation
+	 */
 	protected Image				img;
+	/**
+	 * The sign of the movement on the x axis, 1 or -1
+	 */
 	protected int				xOffset;
+	/**
+	 * The sign of the movement on the y axis, 1 or -1
+	 */
 	protected int				yOffset;
+	/**
+	 * The speed factor of the movement
+	 */
 	protected int				speed;
 
+	/**
+	 * The point in the image that is currently used as pivot. Each of the four
+	 * parts of the image delimited by this pivot is exchanged with the part of the
+	 * opposite side to form the new image
+	 */
 	protected Point				pivot;
 
+	/**
+	 * Last time at which the value was updated
+	 */
 	protected long				lastXUpdate, lastYUpdate;
 
+	/**
+	 * Last size value applied to the image
+	 */
 	protected int				lastWidth, lastHeight;
 
+	/**
+	 * Constructor initializing the animated image
+	 * 
+	 * @param img   The image to use as animation
+	 * @param xDir  The direction of the animation on the x axis
+	 * @param yDir  The direction of the animation on the y axis
+	 * @param speed The speed of the animation
+	 */
 	public SmoothAnimation ( Image img, int xDir, int yDir, int speed ) {
 		this.img = img;
 
@@ -34,39 +71,73 @@ public class SmoothAnimation implements SizedRenderable {
 		lastYUpdate = lastXUpdate;
 	}
 
+	/**
+	 * Method used for calculating the distance traveled by the pivot on each axis
+	 * 
+	 * @param  offsetPerStep The direction to take for the current axis
+	 * @param  timeDiff      The difference of time since the last calculation
+	 * @return               The distance traveled by the pivot since last
+	 *                       calculation
+	 */
 	protected int getNewPos ( int offsetPerStep, long timeDiff ) {
 		return offsetPerStep
 			* ( int ) ( Math.floor( ( timeDiff * speed ) / ( float ) SmoothAnimation.MILLIS_PER_STEP ) );
 	}
 
+	/**
+	 * Static utilitary method for bounding a value using modulos
+	 * 
+	 * @param  firstVal   The value to bound
+	 * @param  lowerBound The value of the lower bound
+	 * @param  upperBound The value of the upper bound
+	 * @return            The bounded value
+	 */
+	private static float boundNewPoint ( float firstVal, int lowerBound, int upperBound ) {
+		if ( upperBound < lowerBound ) return firstVal;
+
+		float boundedNewVal = firstVal;
+
+		while ( boundedNewVal < lowerBound || boundedNewVal >= upperBound ) {
+			boundedNewVal -= Math.signum( boundedNewVal ) * upperBound;
+		}
+
+		return boundedNewVal;
+	}
+
+	/**
+	 * Method used for updating the pivots position
+	 */
 	protected void updatePivot () {
+		// Update the time
 		final long newUpdateTime = System.currentTimeMillis();
 
 		final long xTimeDiff = newUpdateTime - lastXUpdate;
 		final long yTimeDiff = newUpdateTime - lastYUpdate;
 
+		// Get the traveled distance for each axis
 		final int xDiff = getNewPos( xOffset, xTimeDiff );
 		final int yDiff = getNewPos( yOffset, yTimeDiff );
 
+		// Change the x position of the pivot
 		if ( Math.abs( xDiff ) > 0 ) {
-			float boundedNewX = pivot.getX() + xDiff;
-			while ( boundedNewX < 0 || boundedNewX >= img.getWidth() ) {
-				boundedNewX -= Math.signum( boundedNewX ) * img.getWidth();
-			}
-			pivot.setX( boundedNewX );
+			pivot.setX( SmoothAnimation.boundNewPoint( pivot.getX() + xDiff, 0, img.getWidth() ) );
 			lastXUpdate = newUpdateTime;
 		}
 
+		// Change the Y position of the pivot
 		if ( Math.abs( yDiff ) > 0 ) {
-			float boundedNewY = pivot.getY() + yDiff;
-			while ( boundedNewY < 0 || boundedNewY >= img.getHeight() ) {
-				boundedNewY -= Math.signum( boundedNewY ) * img.getHeight();
-			}
-			pivot.setY( boundedNewY );
+			pivot.setY( SmoothAnimation.boundNewPoint( pivot.getY() + yDiff, 0, img.getHeight() ) );
 			lastYUpdate = newUpdateTime;
 		}
 	}
 
+	/**
+	 * Method used for drawing the adjusted image on screen
+	 * 
+	 * @param onImage  The rectangle of the image to draw
+	 * @param onScreen The portion of the screen to draw on
+	 * @param filter   The color filter to apply on the image
+	 */
 	protected void drawImagePart ( Rectangle onImage, Rectangle onScreen, Color filter ) {
 		if ( filter == null ) {
 			img.draw(

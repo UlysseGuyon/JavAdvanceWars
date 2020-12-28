@@ -11,17 +11,17 @@ public class App {
 
 	public static void main ( String[] args ) {
 		// TODO arrange dll loading for the jar to work
-		// try {
-		// Class< ? > nativeLoaderClass = Class.forName( "NativeLoader" );
-		// Method nativeLoaderMethod = nativeLoaderClass.getMethod( "loadNatives" );
-		// nativeLoaderMethod.invoke( null );
-		// } catch ( UnsatisfiedLinkError | ClassNotFoundException |
-		// NoSuchMethodException | SecurityException
-		// | IllegalAccessException | IllegalArgumentException |
-		// InvocationTargetException e ) {
-		// e.printStackTrace();
-		// System.exit( 1 );
-		// }
+//		try {
+//		 	Class< ? > nativeLoaderClass = Class.forName( "NativeLoader" );
+//		 	Method nativeLoaderMethod = nativeLoaderClass.getMethod( "loadNatives" );
+//		 	nativeLoaderMethod.invoke( null );
+//		 } catch ( UnsatisfiedLinkError | ClassNotFoundException |
+//		 	NoSuchMethodException | SecurityException
+//		 	| IllegalAccessException | IllegalArgumentException |
+//		 	InvocationTargetException e ) {
+//		 	e.printStackTrace();
+//		 	System.exit( 1 );
+//		 }
 
 		try {
 			AppGameContainer app = new AppGameContainer( new Engine( CoreConsts.GAME_NAME ) );

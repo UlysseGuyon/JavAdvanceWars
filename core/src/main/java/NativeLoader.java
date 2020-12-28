@@ -87,10 +87,10 @@ public final class NativeLoader {
 		LIBOPENAL_SO ( "libopenal.so", SupportedOS.UNIX, Architecture._32 ),
 		LIBOPENAL_64_SO ( "libopenal64.so", SupportedOS.UNIX, Architecture._64 ),
 		LWJGL_DLL ( "lwjgl.dll", SupportedOS.WIN, Architecture._32 ),
-		LWJGL_64_DLL ( "lwjgl64.dll", SupportedOS.WIN, Architecture._64 ), // ERROR not loadable on WIN32
+		LWJGL_64_DLL ( "lwjgl64.dll", SupportedOS.WIN, Architecture._64 ), // FIXME not loadable on WIN32
 		OPENAL_DYLIB ( "openal.dylib", SupportedOS.MAC, Architecture.NOT_NEEDED ),
 		OPENAL_32_DLL ( "OpenAL32.dll", SupportedOS.WIN, Architecture._32 ),
-		OPENAL_64_DLL ( "OpenAL64.dll", SupportedOS.WIN, Architecture._64 ); // ERROR file not accessible
+		OPENAL_64_DLL ( "OpenAL64.dll", SupportedOS.WIN, Architecture._64 ); // FIXME file not accessible
 
 		public SupportedOS osLib;
 		public Architecture archLib;
